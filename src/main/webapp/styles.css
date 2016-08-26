@@ -1,0 +1,157 @@
+html {
+    background: url(images/lion-flame.jpg) no-repeat center fixed; 
+    background-size: cover;
+}
+
+body{
+	width: 80%
+	margin-top: 0;
+	padding-top: 0;
+	margin-left: 10%;
+	margin-right: 10%;
+	align-content: center;
+	color: #ffffff;
+	text-align: center;
+}
+h1{
+	position: fixed;
+	top: 0px;
+	margin-top: 0px;
+	padding: 15px;
+	width: 80%;
+	background-color: #000000;
+	z-index: 1;
+}
+
+
+
+header {
+	position: top;
+	background-color: #000000;
+	color: #ffffff;
+	margin-top: 0;
+	padding-top: 20px;
+
+	
+	
+}
+nav {
+	text-align: center;
+
+	
+}
+
+ul {
+	position: fixed;
+	list-style-type: none;
+    margin-top: 35px;
+    padding-left: 15px;
+    background-color: #000000;
+    width: 100%;
+    z-index: 1;
+    
+}
+
+li {
+	display: block;
+	padding: 14px 16px;
+    float: left;
+    border-right: 1px solid #333333;
+}
+
+li a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+ }
+
+li a:hover{
+    background-color: #888888;
+    color: #000000;
+}
+li a:active {
+	background-color: #333333;
+	color: #ffffff;
+}
+li a:active:not(.active) {
+	background-color: #555555;
+	color: #ffffff;
+}
+
+main {	
+	width: 90%;
+}
+
+div.transbox{
+	box-shadow: 10px 10px 5px grey;
+	border-radius: 25px;
+	background-color: #cccccc;
+	margin-top: 100px;
+	padding: 20px;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	
+}
+
+div.trans p {
+	color: #000000;
+	font-weight: bold;
+}
+
+tr.heading {
+	position: top center;
+	width: 100%;
+	font-family: arial black;
+	font-size: 20pt;
+	font-style: bold;
+	text-align: center;
+
+	
+}
+table.center {
+	margin-left: 20%;
+	margin-right: 20%;
+	table-layout: auto;
+	background: rgba(0, 0, 0, 0.2);
+	width: 60%;
+	border: 2px solid #ffffff;
+	font-family: ariel;
+	color: #000000;
+	text-align: left;
+	position: fixed center;
+}
+#images {
+	float: left;
+	margin-left: 5px;
+}
+tr {
+	margin: auto;
+	opacity: 1.0;
+	border: 2px solid #ffffff;
+}
+td {
+	margin: auto;
+	opacity: 1.0;
+	border: 2px solid #ffffff;
+}
+
+img {
+	float: left;
+	width: 20%;
+	padding: 10px;
+	width: 250px;
+	height: 225px;
+}
+img:hover{
+	opacity: 0.8;
+}
+#form {
+	align-content: center;
+}
+
+footer.info {
+	box-shadow: 10px 10px 5px grey;
+	border-radius: 25px;
+	background-color: #cccccc;
+	float: left;
+}
