@@ -149,11 +149,8 @@
 
 	<tr><td>
 	
-		<form>
-			Animal ID:<br />
-				 <input type="text" name="animalid">
-				 <br />
- 			Species/Type:<br />
+		<form action="addToDB" method="post">
+			Species/Type:<br />
  				<input type="text" name="species">
  				<br />
 			Animal Name:<br />
@@ -167,14 +164,19 @@
  				<br />
 			 Weight:<br />
 				 <input type="text" name="weight">
+		<input type="submit" value="submit">
 		</form>
+		<br />
+		
 	</td>
 	<td>
 
 		<form>
  			Animal ID:<br />
 				 <input type="text" name="animalid">
+		<button type="button" class="btn btn-primary btn-lg">Submit</button>
 		</form>
+		<br />
 		
 	</td>
 	</tr>

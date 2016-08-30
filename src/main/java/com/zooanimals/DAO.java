@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class DAO {
 
+	static final String JDBC_Driver = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/?user=root&autoReconnect=true&useSSL=false";
 	static final String USER = "root";
 	static final String PASSWORD = "root";
@@ -15,22 +16,23 @@ public class DAO {
 	static PreparedStatement PREP_ST = null;
 	static ResultSet RES_SET = null; 
 
-	static Scanner sc = new Scanner(System.in);
-
 
 	public static void connToDB()
 	{
 		try {
+			Class.forName(JDBC_Driver);
+
 			System.out.println("Trying to conect to the Database...");
 			CONN = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 			System.out.println("Connected to the database.");
 
 
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println("Connection failed");
 			e.printStackTrace();
 		}
-	}//ctdb
+	}
+
 
 	public static void readFromDB()
 	{
@@ -65,13 +67,16 @@ public class DAO {
 		}
 	}//rfdb
 
-	public static void writeToDB(){
+	public static void writeToDB(Animals animals){
+
 		Animals animalToAdd = new Animals();
 
-		animalToAdd = aboutTheAnimal();
+		animalToAdd = animals;
 
-		connToDB();
 		try {
+
+			connToDB();
+
 			PREP_ST = CONN.prepareStatement(insertToDB);
 
 			PREP_ST.setString(1, animalToAdd.getSpecies());
@@ -79,6 +84,8 @@ public class DAO {
 			PREP_ST.setString(3, animalToAdd.getHabitat());
 			PREP_ST.setInt(4, animalToAdd.getAge());
 			PREP_ST.setDouble(5, animalToAdd.getWeight());
+
+			System.out.println(PREP_ST);
 
 			PREP_ST.executeUpdate();
 
@@ -88,12 +95,47 @@ public class DAO {
 		}
 
 	}//wtdb
+
+	static void delFromDB()
+	{
+		Scanner sc = new Scanner(System.in);
+
+		readFromDB();
+
+		System.out.println("Which animal would you like to delete?");
+		int id  = sc.nextInt();
+
+		try
+		{
+
+			PREP_ST = CONN.prepareStatement(delFromTable(id ));
+			PREP_ST.executeUpdate();
+
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+	}//dfdb
+
+
+
 	private static String insertToDB = "INSERT INTO `zoo_animals`.`animals`"
 			+ "(species, name, habitat, age, weight)"
 			+"VALUES"
-			+"(?, ?, ?,?,?)";
+			+"(?, ?, ?,?,?);";
+
+	private static String delFromTable(int id)
+	{
+
+		return "DELETE FROM `zoo_animals`.`animals` WHERE animals_id = " + id + ";";
+
+	}
+
+
 
 	public static Animals aboutTheAnimal(){
+		Scanner sc = new Scanner(System.in);
 		Animals animalToAdd = new Animals();
 
 		System.out.println("What type of animal would you like to add to your fantasy zoo(i.e. Panda, Fox, etc)?");
@@ -111,28 +153,10 @@ public class DAO {
 		System.out.println("Finally, how much does your animal weigh?");
 		animalToAdd.setWeight(Double.parseDouble(sc.nextLine()));
 
+		sc.close();
 		return animalToAdd;
 	}//ata
-	
-	public static void deleteFromDB() {
 
-		connToDB();
 
-		System.out.println("What is the ID# of the animal you'd like to delete?");
-
-		String id = sc.nextLine();
-
-		try {
-			PREP_ST = CONN.prepareStatement("DELETE FROM `zoo_animals`.`animals` WHERE animals_id = ?");
-			PREP_ST.setString(1, id);
-			PREP_ST.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		sc.close();
-	}//dfdb
-
-	
 
 }//class
